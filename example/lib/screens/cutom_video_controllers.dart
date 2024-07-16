@@ -103,7 +103,7 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
           child: Column(
             children: [
               sizeH20,
-              PodVideoPlayer(
+              RRVideoPlayer(
                 alwaysShowProgressBar: alwaysShowProgressBar,
                 controller: controller,
                 matchFrameAspectRatioToVideo: true,

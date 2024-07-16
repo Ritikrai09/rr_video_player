@@ -45,7 +45,7 @@ class _PlayVideoFromAssetState extends State<PlayVideoFromNetworkQualityUrls> {
       appBar: AppBar(title: const Text('Play video from Quality urls')),
       body: SafeArea(
         child: Center(
-          child: PodVideoPlayer(
+          child: RRVideoPlayer(
             controller: controller,
             podProgressBarConfig: const RRProgressBarConfig(
               padding: kIsWeb

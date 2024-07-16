@@ -3,7 +3,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'package:rr_video_player/rr_video_player.dart';
 
 void main(List<String> args) {
-  PodVideoPlayer.enableLogs = true;
+  RRVideoPlayer.enableLogs = true;
   runApp(const ListOfVideosApp());
 }
 
@@ -108,7 +108,7 @@ class VideoViewerState extends State<VideoViewer> {
             widget.controller.pause();
           }
         },
-        child: PodVideoPlayer(
+        child: RRVideoPlayer(
             controller: widget.controller,
             alwaysShowProgressBar: true,
             overlayBuilder: (options) {

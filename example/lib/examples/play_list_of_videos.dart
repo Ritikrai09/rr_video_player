@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rr_video_player/rr_video_player.dart';
 
 void main(List<String> args) {
-  PodVideoPlayer.enableLogs = true;
+  RRVideoPlayer.enableLogs = true;
   runApp(const ListOfVideosApp());
 }
 
@@ -151,7 +151,7 @@ class _ListOfVideosViewerState extends State<ListOfVideosViewer> {
         controllers[index].initialise();
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 40),
-          child: PodVideoPlayer(controller: controllers[index]),
+          child: RRVideoPlayer(controller: controllers[index]),
         );
       },
     );

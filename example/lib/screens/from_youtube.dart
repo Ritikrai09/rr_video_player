@@ -38,7 +38,7 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromYoutube> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              PodVideoPlayer(
+              RRVideoPlayer(
                 controller: controller,
                 videoThumbnail: const DecorationImage(
                   image: NetworkImage(

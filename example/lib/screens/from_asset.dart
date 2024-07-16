@@ -31,7 +31,7 @@ class _PlayVideoFromAssetState extends State<PlayVideoFromAsset> {
         title: const Text('Play video from Asset (with custom labels)'),
       ),
       body: Center(
-        child: PodVideoPlayer(
+        child: RRVideoPlayer(
           controller: controller,
           podPlayerLabels: const RRPlayerLabels(
             play: "PLAY",

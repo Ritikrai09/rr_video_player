@@ -11,7 +11,7 @@ import 'screens/cutom_video_controllers.dart';
 import 'screens/from_vimeo_id.dart';
 
 void main() {
-  PodVideoPlayer.enableLogs = true;
+  RRVideoPlayer.enableLogs = true;
   runApp(const MyApp());
 }
 

@@ -5,7 +5,7 @@ enum PodVideoState {
   error,
 }
 
-enum PodVideoPlayerType {
+enum RRVideoPlayerType {
   network,
   networkQualityUrls,
   file,
