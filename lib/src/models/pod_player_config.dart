@@ -2,6 +2,7 @@ class PodPlayerConfig {
   final bool autoPlay;
   final bool isLooping;
   final bool forcedVideoFocus;
+  final bool isPlayCenter;
   final bool wakelockEnabled, isShowDuration, isFullScreen;
 
   /// Initial video quality priority. The first available option will be used,
@@ -13,6 +14,7 @@ class PodPlayerConfig {
 
   const PodPlayerConfig({
     this.autoPlay = true,
+    this.isPlayCenter=false,
     this.isLooping = false,
     this.isShowDuration = false,
     this.isFullScreen = false,

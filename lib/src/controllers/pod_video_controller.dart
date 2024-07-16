@@ -4,7 +4,7 @@ class _PodVideoController extends _RRUiController {
   Timer? showOverlayTimer;
   Timer? showOverlayTimer1;
 
-  bool isOverlayVisible = true;
+  bool isOverlayVisible = false;
   bool isLooping = false;
   bool isFullScreen = false;
   bool isvideoPlaying = false;

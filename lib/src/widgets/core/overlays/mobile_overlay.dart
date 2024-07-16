@@ -31,18 +31,15 @@ class _MobileOverlay extends StatelessWidget {
                         : podCtr.onLeftDoubleTap,
                   ),
                 ),
+
                 SizedBox(
                   height: double.infinity,
                   child: Center(
-                    child: _AnimatedMuteUnmuteIcon(tag: tag, size: 42),
-                  ),
-                ),
-                //  SizedBox(
-                //   height: double.infinity,
-                //   child: Center(
-                //     child:,
-                //    ),
-                //  ),
+                    child: podCtr.isPlayCenter == false
+                      ? _AnimatedMuteUnmuteIcon(tag: tag, size: 42)
+                       : _AnimatedPlayPauseIcon(tag: tag,size: 42)
+                   ),
+                 ),
                 Expanded(
                   child: DoubleTapIcon(
                     isForward: true,
