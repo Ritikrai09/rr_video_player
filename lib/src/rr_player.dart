@@ -23,7 +23,7 @@ part 'widgets/core/pod_core_player.dart';
 part 'widgets/core/video_gesture_detector.dart';
 part 'widgets/full_screen_view.dart';
 
-class PodVideoPlayer extends StatefulWidget {
+class RRVideoPlayer extends StatefulWidget {
   final PodPlayerController controller;
   final double frameAspectRatio;
   final double videoAspectRatio;
@@ -48,7 +48,7 @@ class PodVideoPlayer extends StatefulWidget {
   /// If no widget is informed, a default [CircularProgressIndicator] will be shown.
   final WidgetBuilder? onLoading;
 
-  PodVideoPlayer({
+  RRVideoPlayer({
     required this.controller,
     super.key,
     this.frameAspectRatio = 16 / 9,
@@ -87,10 +87,10 @@ class PodVideoPlayer extends StatefulWidget {
   }
 
   @override
-  State<PodVideoPlayer> createState() => _PodVideoPlayerState();
+  State<RRVideoPlayer> createState() => _RRVideoPlayerState();
 }
 
-class _PodVideoPlayerState extends State<PodVideoPlayer>
+class _RRVideoPlayerState extends State<RRVideoPlayer>
     with TickerProviderStateMixin {
   late PodGetXVideoController _podCtr;
 
@@ -140,7 +140,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
     _podCtr.showOverlayTimer1?.cancel();
     _podCtr.leftDoubleTapTimer?.cancel();
     _podCtr.rightDoubleTapTimer?.cancel();
-    podLog('local PodVideoPlayer disposed');
+    podLog('local RRVideoPlayer disposed');
   }
 
   ///

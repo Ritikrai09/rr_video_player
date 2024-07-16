@@ -30,7 +30,7 @@ class PodPlayerController {
 
   void _init() {
     getTag = UniqueKey().toString();
-    Get.config(enableLog: PodVideoPlayer.enableGetxLogs);
+    Get.config(enableLog: RRVideoPlayer.enableGetxLogs);
     _ctr = Get.put(PodGetXVideoController(), permanent: true, tag: getTag)
       ..config(
         playVideoFrom: playVideoFrom,
