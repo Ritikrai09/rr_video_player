@@ -1,0 +1,26 @@
+name: rr_video_player
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+repository: https://github.com/ritikrai09/rr_video_player
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+  flutter: ">=3.0.0"
+
+# Add regular dependencies here.
+dependencies:
+  video_player: ^2.9.1
+  http: ^1.2.1
+  get: ^4.6.6
+  wakelock_plus: ^1.2.4
+  universal_html: ^2.2.4
+  youtube_explode_dart: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0+1
+
+screenshots:
+  - description: RR video player logo
+    path: screenshots/logo.png
