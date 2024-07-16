@@ -268,7 +268,7 @@ class PodGetXVideoController extends _PodGesturesController {
         playVideo(false);
         break;
       case PodVideoState.loading:
-        isShowOverlay(true);
+        isShowOverlay(false);
         break;
       case PodVideoState.error:
         if (podPlayerConfig.wakelockEnabled) WakelockPlus.disable();

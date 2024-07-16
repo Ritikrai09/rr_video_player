@@ -83,9 +83,9 @@ class _PodVideoController extends _RRUiController {
       // isShowOverlay(true);
       // ignore: unawaited_futures
       _videoCtr?.play();
-      isShowOverlay(false, delay: const Duration(seconds: 1));
+      isShowOverlay(false);
     } else {
-      isShowOverlay(true);
+      // isShowOverlay(true);
       // ignore: unawaited_futures
       _videoCtr?.pause();
     }
