@@ -22,17 +22,16 @@ class _MobileOverlay extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Expanded(
-                //   child: DoubleTapIcon(
-                //     tag: tag,
-                //     isForward: false,
-                //     height: double.maxFinite,
-                //     onDoubleTap: _isRtl()
-                //         ? podCtr.onRightDoubleTap
-                //         : podCtr.onLeftDoubleTap,
-                //   ),
-                // ),
-            
+                Expanded(
+                  child: DoubleTapIcon(
+                    tag: tag,
+                    isForward: false,
+                    height: double.maxFinite,
+                    onDoubleTap: _isRtl()
+                        ? podCtr.onRightDoubleTap
+                        : podCtr.onLeftDoubleTap,
+                  ),
+                ),
                 SizedBox(
                   height: double.infinity,
                   child: Center(
@@ -41,16 +40,16 @@ class _MobileOverlay extends StatelessWidget {
                        : _AnimatedPlayPauseIcon(tag: tag,size: 42)
                    ),
                  ),
-                // Expanded(
-                //   child: DoubleTapIcon(
-                //     isForward: true,
-                //     tag: tag,
-                //     height: double.maxFinite,
-                //     onDoubleTap: _isRtl()
-                //         ? podCtr.onLeftDoubleTap
-                //         : podCtr.onRightDoubleTap,
-                //   ),
-                // ),
+                Expanded(
+                  child: DoubleTapIcon(
+                    isForward: true,
+                    tag: tag,
+                    height: double.maxFinite,
+                    onDoubleTap: _isRtl()
+                        ? podCtr.onLeftDoubleTap
+                        : podCtr.onRightDoubleTap,
+                  ),
+                ),
               ],
             ),
           ),
