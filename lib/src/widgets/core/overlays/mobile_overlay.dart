@@ -20,18 +20,19 @@ class _MobileOverlay extends StatelessWidget {
           child: ColoredBox(
             color: overlayColor,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: DoubleTapIcon(
-                    tag: tag,
-                    isForward: false,
-                    height: double.maxFinite,
-                    onDoubleTap: _isRtl()
-                        ? podCtr.onRightDoubleTap
-                        : podCtr.onLeftDoubleTap,
-                  ),
-                ),
-
+                // Expanded(
+                //   child: DoubleTapIcon(
+                //     tag: tag,
+                //     isForward: false,
+                //     height: double.maxFinite,
+                //     onDoubleTap: _isRtl()
+                //         ? podCtr.onRightDoubleTap
+                //         : podCtr.onLeftDoubleTap,
+                //   ),
+                // ),
+            
                 SizedBox(
                   height: double.infinity,
                   child: Center(
@@ -40,45 +41,48 @@ class _MobileOverlay extends StatelessWidget {
                        : _AnimatedPlayPauseIcon(tag: tag,size: 42)
                    ),
                  ),
-                Expanded(
-                  child: DoubleTapIcon(
-                    isForward: true,
-                    tag: tag,
-                    height: double.maxFinite,
-                    onDoubleTap: _isRtl()
-                        ? podCtr.onLeftDoubleTap
-                        : podCtr.onRightDoubleTap,
-                  ),
-                ),
+                // Expanded(
+                //   child: DoubleTapIcon(
+                //     isForward: true,
+                //     tag: tag,
+                //     height: double.maxFinite,
+                //     onDoubleTap: _isRtl()
+                //         ? podCtr.onLeftDoubleTap
+                //         : podCtr.onRightDoubleTap,
+                //   ),
+                // ),
               ],
             ),
           ),
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: IgnorePointer(
-                  child: podCtr.videoTitle ?? const SizedBox(),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: IgnorePointer(
+                    child: podCtr.videoTitle ?? const SizedBox(),
+                  ),
                 ),
-              ),
-              MaterialIconButton(
-                toolTipMesg: podCtr.podPlayerLabels.settings,
-                color: itemColor,
-                onPressed: () {
-                  if (podCtr.isOverlayVisible) {
-                    _bottomSheet(context);
-                  } else {
-                    podCtr.toggleVideoOverlay();
-                  }
-                },
-                child: const Icon(
-                  Icons.more_vert_rounded,
+                MaterialIconButton(
+                  toolTipMesg: podCtr.podPlayerLabels.settings,
+                  color: itemColor,
+                  onPressed: () {
+                    if (podCtr.isOverlayVisible) {
+                      _bottomSheet(context);
+                    } else {
+                      podCtr.toggleVideoOverlay();
+                    }
+                  },
+                  child: const Icon(
+                    Icons.more_vert_rounded,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Align(
