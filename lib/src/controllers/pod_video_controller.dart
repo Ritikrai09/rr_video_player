@@ -80,7 +80,7 @@ class _PodVideoController extends _RRUiController {
   Future<void> playVideo(bool val) async {
     isvideoPlaying = val;
     if (isvideoPlaying) {
-      isShowOverlay(true);
+      // isShowOverlay(true);
       // ignore: unawaited_futures
       _videoCtr?.play();
       isShowOverlay(false, delay: const Duration(seconds: 1));
