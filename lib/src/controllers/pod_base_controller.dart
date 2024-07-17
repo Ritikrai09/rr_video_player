@@ -3,7 +3,7 @@ part of 'pod_getx_video_controller.dart';
 
 class _PodBaseController extends GetxController {
   ///main video controller
-  VideoPlayerController? _videoCtr;
+  CachedVideoPlayerPlusController? _videoCtr;
 
   ///
   late RRVideoPlayerType _videoPlayerType;

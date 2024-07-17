@@ -9,7 +9,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  video_player: ^2.9.1
+  # video_player: ^2.9.1
+  cached_video_player_plus: ^3.0.2
   http: ^1.2.1
   get: ^4.6.6
   wakelock_plus: ^1.2.4

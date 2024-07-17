@@ -20,7 +20,7 @@ part 'pod_video_quality_controller.dart';
 
 class PodGetXVideoController extends _PodGesturesController {
   ///main videoplayer controller
-  VideoPlayerController? get videoCtr => _videoCtr;
+  CachedVideoPlayerPlusController? get videoCtr => _videoCtr;
 
   ///podVideoPlayer state notifier
   PodVideoState get podVideoState => _podVideoState;
@@ -50,6 +50,7 @@ class PodGetXVideoController extends _PodGesturesController {
     autoPlay = playerConfig.autoPlay;
     isShowDuration = playerConfig.isShowDuration;
     isFullScreen = playerConfig.isFullScreen;
+    isPlayCenter = playerConfig.isPlayCenter;
     isLooping = playerConfig.isLooping;
   }
 
@@ -88,7 +89,7 @@ class PodGetXVideoController extends _PodGesturesController {
       case RRVideoPlayerType.network:
 
         ///
-        _videoCtr = VideoPlayerController.networkUrl(
+        _videoCtr = CachedVideoPlayerPlusController.networkUrl(
           Uri.parse(playVideoFrom.dataSource!),
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
@@ -104,7 +105,7 @@ class PodGetXVideoController extends _PodGesturesController {
         );
 
         ///
-        _videoCtr = VideoPlayerController.networkUrl(
+        _videoCtr = CachedVideoPlayerPlusController.networkUrl(
           Uri.parse(url),
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
@@ -125,7 +126,7 @@ class PodGetXVideoController extends _PodGesturesController {
         );
 
         ///
-        _videoCtr = VideoPlayerController.networkUrl(
+        _videoCtr = CachedVideoPlayerPlusController.networkUrl(
           Uri.parse(url),
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
@@ -145,7 +146,7 @@ class PodGetXVideoController extends _PodGesturesController {
           videoUrls: vimeoOrVideoUrls,
         );
 
-        _videoCtr = VideoPlayerController.networkUrl(
+        _videoCtr = CachedVideoPlayerPlusController.networkUrl(
           Uri.parse(url),
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
@@ -158,7 +159,7 @@ class PodGetXVideoController extends _PodGesturesController {
       case RRVideoPlayerType.asset:
 
         ///
-        _videoCtr = VideoPlayerController.asset(
+        _videoCtr = CachedVideoPlayerPlusController.asset(
           playVideoFrom.dataSource!,
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           package: playVideoFrom.package,
@@ -173,7 +174,7 @@ class PodGetXVideoController extends _PodGesturesController {
         }
 
         ///
-        _videoCtr = VideoPlayerController.file(
+        _videoCtr = CachedVideoPlayerPlusController.file(
           playVideoFrom.file!,
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           videoPlayerOptions: playVideoFrom.videoPlayerOptions,
@@ -190,7 +191,7 @@ class PodGetXVideoController extends _PodGesturesController {
           videoUrls: vimeoOrVideoUrls,
         );
 
-        _videoCtr = VideoPlayerController.networkUrl(
+        _videoCtr = CachedVideoPlayerPlusController.networkUrl(
           Uri.parse(url),
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
@@ -268,7 +269,7 @@ class PodGetXVideoController extends _PodGesturesController {
         playVideo(false);
         break;
       case PodVideoState.loading:
-        isShowOverlay(false);
+        isShowOverlay(true);
         break;
       case PodVideoState.error:
         if (podPlayerConfig.wakelockEnabled) WakelockPlus.disable();

@@ -1,7 +1,7 @@
 part of 'package:rr_video_player/src/rr_player.dart';
 
 class _PodCoreVideoPlayer extends StatelessWidget {
-  final VideoPlayerController videoPlayerCtr;
+  final CachedVideoPlayerPlusController videoPlayerCtr;
   final double videoAspectRatio;
   final String tag;
 
@@ -18,9 +18,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
       builder: (ctrx) {
         return KeyboardListener(
           autofocus: true,
-          focusNode:
-              (podCtr.isFullScreen ? FocusNode() : podCtr.keyboardFocusWeb) ??
-                  FocusNode(),
+          focusNode:(podCtr.isFullScreen ? FocusNode() : podCtr.keyboardFocusWeb) ?? FocusNode(),
           onKeyEvent: (value) => podCtr.onKeyBoardEvents(
             event: value,
             appContext: ctrx,
@@ -32,7 +30,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
               Center(
                 child: AspectRatio(
                   aspectRatio: videoAspectRatio,
-                  child: VideoPlayer(videoPlayerCtr),
+                  child: CachedVideoPlayerPlus(videoPlayerCtr),
                 ),
               ),
               GetBuilder<PodGetXVideoController>(
