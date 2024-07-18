@@ -7,7 +7,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'blocs/preload_bloc.dart' as _i4;
+import 'bloc/preload_bloc.dart' as _i4;
 import 'service/navigation_service.dart' as _i3;
 
 const String _prod = 'prod';
