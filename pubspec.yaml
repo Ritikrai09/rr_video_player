@@ -11,17 +11,24 @@ environment:
 dependencies:
   # video_player: ^2.9.1
   cached_video_player_plus: ^3.0.2
+  flutter_bloc: ^8.1.2
   http: ^1.2.1
   get: ^4.6.6
   wakelock_plus: ^1.2.4
   universal_html: ^2.2.4
   youtube_explode_dart: ^2.2.0
   uuid: ^4.4.0
+  flutter_isolate: ^2.0.2
+  injectable: ^1.4.1
+  injectable_generator: ^1.4.1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^5.0.0+1
+  build_runner: any
+  freezed: any
 
 screenshots:
   - description: RR video player logo

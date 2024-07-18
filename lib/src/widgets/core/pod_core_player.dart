@@ -35,6 +35,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
               ),
               GetBuilder<PodGetXVideoController>(
                 tag: tag,
+                
                 id: 'podVideoState',
                 builder: (_) => GetBuilder<PodGetXVideoController>(
                   tag: tag,
