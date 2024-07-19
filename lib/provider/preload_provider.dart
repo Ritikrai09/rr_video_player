@@ -9,6 +9,20 @@ import 'package:flutter_preload_videos/video_apis.dart';
 class PreloadProvider extends ChangeNotifier {
 
   List<String> _urls = const [];
+  
+  bool looping = false;
+
+
+  bool _isMute = false;
+
+  bool get isMute => _isMute;
+
+  set setMute (int index ){
+     _isMute = !_isMute;
+     _controllers[index]!.setVolume(_isMute == true ? 0 : 100);
+     notifyListeners();
+  }
+
 
   List<String> get urls => _urls;
 
@@ -78,6 +92,8 @@ class PreloadProvider extends ChangeNotifier {
     return _videoQualityUrl;
   }
 
+  
+
   Future _initializeControllerAtIndex(int index) async {
 
     if (_urls.length > index && index >= 0) {
@@ -97,11 +113,35 @@ class PreloadProvider extends ChangeNotifier {
           final CachedVideoPlayerPlusController _controller =
           CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl));
 
+          _controller.setLooping(looping);
+
+          _controller.setVolume(_isMute == true ? 0 : 100);
+
                 /// Add to [controllers] list
           controllers[index] = _controller;
 
           /// Initialize
           await _controller.initialize();
+
+        // int dur = controllers[index]!.value.duration.inMilliseconds;
+        // int pos = controllers[index]!.value.position.inMilliseconds;
+        // int buf = controllers[index]!.value.buffered.last.end.inMilliseconds;
+     
+        //  var _position,_buffer;
+       
+        //   if (dur <= pos) {
+        //    _position = 0;
+        //     return;
+        //   }
+
+        //   _position = pos / dur;
+        //   _buffer = buf / dur;
+       
+        // if (dur - pos < 1) {
+        //   if (index < _urls.length - 1) {
+        //     _playControllerAtIndex(index+1);
+        //   }
+        // }
 
           log('🚀🚀🚀 INITIALIZED Youtube $index');
 
