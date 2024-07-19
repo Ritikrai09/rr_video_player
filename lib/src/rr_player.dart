@@ -303,7 +303,7 @@ void getVideosTask(SendPort mySendPort) async {
       final SendPort isolateResponseSendPort = message[1];
 
       final List<String> _urls =
-          await ApiService.getVideos(id: index + kPreloadLimit);
+          await PreloadBloc().getVideos(id: index + kPreloadLimit );
 
       isolateResponseSendPort.send(_urls);
     }

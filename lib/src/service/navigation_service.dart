@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class NavigationService {
-  final GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> getnavigationKey = GlobalKey<NavigatorState>();
 
-  GlobalKey<NavigatorState> get navigationKey => _navigationKey;
+  GlobalKey<NavigatorState> get navigationKey => getnavigationKey;
 }

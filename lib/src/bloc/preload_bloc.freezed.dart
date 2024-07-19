@@ -616,6 +616,7 @@ abstract class _OnVideoIndexChanged implements PreloadEvent {
 /// @nodoc
 mixin _$PreloadState {
   List<String> get urls => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
   Map<int, CachedVideoPlayerPlusController> get controllers =>
       throw _privateConstructorUsedError;
   int get focusedIndex => throw _privateConstructorUsedError;
@@ -710,12 +711,17 @@ class __$$_PreloadStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? urls = freezed,
+    Object? url = freezed,
     Object? controllers = freezed,
     Object? focusedIndex = freezed,
     Object? reloadCounter = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_$_PreloadState(
+      url:  url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
       urls: urls == freezed
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -745,6 +751,7 @@ class __$$_PreloadStateCopyWithImpl<$Res>
 class _$_PreloadState implements _PreloadState {
   _$_PreloadState(
       {required this.urls,
+      required this.url,
       required this.controllers,
       required this.focusedIndex,
       required this.reloadCounter,
@@ -752,6 +759,8 @@ class _$_PreloadState implements _PreloadState {
 
   @override
   final List<String> urls;
+   @override
+  final String url;
   @override
   final Map<int, CachedVideoPlayerPlusController> controllers;
   @override
@@ -763,7 +772,7 @@ class _$_PreloadState implements _PreloadState {
 
   @override
   String toString() {
-    return 'PreloadState(urls: $urls, controllers: $controllers, focusedIndex: $focusedIndex, reloadCounter: $reloadCounter, isLoading: $isLoading)';
+    return 'PreloadState(urls: $urls, url: $url, controllers: $controllers, focusedIndex: $focusedIndex, reloadCounter: $reloadCounter, isLoading: $isLoading)';
   }
 
   @override
@@ -794,11 +803,17 @@ class _$_PreloadState implements _PreloadState {
   @override
   _$$_PreloadStateCopyWith<_$_PreloadState> get copyWith =>
       __$$_PreloadStateCopyWithImpl<_$_PreloadState>(this, _$identity);
+      
+        @override
+        getInitialVideos() {
+           throw _privateConstructorUsedError;
+        }
 }
 
 abstract class _PreloadState implements PreloadState {
   factory _PreloadState(
       {required final List<String> urls,
+      required final String url,
       required final Map<int, CachedVideoPlayerPlusController> controllers,
       required final int focusedIndex,
       required final int reloadCounter,
@@ -806,13 +821,20 @@ abstract class _PreloadState implements PreloadState {
 
   @override
   List<String> get urls => throw _privateConstructorUsedError;
+
+  @override
+  String get url => throw _privateConstructorUsedError;
+
   @override
   Map<int, CachedVideoPlayerPlusController> get controllers =>
       throw _privateConstructorUsedError;
+
   @override
   int get focusedIndex => throw _privateConstructorUsedError;
+
   @override
   int get reloadCounter => throw _privateConstructorUsedError;
+  
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override

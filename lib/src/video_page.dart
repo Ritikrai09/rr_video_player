@@ -15,14 +15,9 @@ class VideoPage extends StatelessWidget {
           return PageView.builder(
             itemCount: state.urls.length,
             scrollDirection: Axis.vertical,
-            onPageChanged: (index) =>
-                BlocProvider.of<PreloadBloc>(context, listen: false)
-                    .add(PreloadEvent.onVideoIndexChanged(index)),
+            onPageChanged: (index) => BlocProvider.of<PreloadBloc>(context, listen: false).add(PreloadEvent.onVideoIndexChanged(index)),
             itemBuilder: (context, index) {
-              // Is at end and isLoading
-              final bool _isLoading =
-                  (state.isLoading && index == state.urls.length - 1);
-
+              final bool _isLoading = (state.isLoading && index == state.urls.length - 1);
               return state.focusedIndex == index
                   ? VideoWidget(
                       isLoading: _isLoading,

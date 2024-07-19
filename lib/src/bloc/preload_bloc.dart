@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rr_video_player/rr_video_player.dart';
 import 'package:rr_video_player/src/core/constants.dart';
-import 'package:rr_video_player/src/service/api_service.dart';
+import 'package:rr_video_player/src/utils/video_apis.dart';
 
 part 'preload_bloc.freezed.dart';
 part 'preload_event.dart';
@@ -15,18 +15,32 @@ part 'preload_state.dart';
 @injectable
 @prod
 class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
+
+  // String baseUrl='';
+  
+  List<String> get getvideos => videos;
+
+   set setVideos (List<String> video) {
+    videos = video; 
+  }  
+  
+   List<String> videos = [];
+
   PreloadBloc() : super(PreloadState.initial()) {
+    
     on(_mapEventToState);
+    
   }
 
   void _mapEventToState(PreloadEvent event, Emitter<PreloadState> emit) async {
+    
     await event.map(
       setLoading: (e) {
         emit(state.copyWith(isLoading: true));
       },
       getVideosFromApi: (e) async {
         /// Fetch first 5 videos from api
-        final List<String> _urls = await ApiService.getVideos();
+         List<String> _urls = await getVideos();
         state.urls.addAll(_urls);
 
         /// Initialize 1st video
@@ -73,6 +87,22 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
     );
   }
 
+ Future<List<String>> getVideos({int id = 0}) async {
+    // No more videos
+    if ((id >= videos.length)) {
+      return [];
+    }
+    await Future.delayed(const Duration(seconds: kLatency));
+
+    if ((id + kNextLimit >= videos.length)) {
+      return videos.sublist(id, videos.length);
+    }
+
+    return videos.sublist(id, id + kNextLimit);
+  }
+
+  
+
   void _playNext(int index) {
     /// Stop [index - 1] controller
     _stopControllerAtIndex(index - 1);
@@ -101,21 +131,103 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
     _initializeControllerAtIndex(index - 1);
   }
 
+  Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
+    String youtubeIdOrUrl,
+    bool live,
+  ) async {
+    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live) ??
+        [];
+  }
+
+
   Future _initializeControllerAtIndex(int index) async {
     if (state.urls.length > index && index >= 0) {
       /// Create new controller
-      final CachedVideoPlayerPlusController _controller =
+       
+      if (state.urls[index].contains(RegExp('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?\$'))) {
+           var urls  = await  getVideoQualityUrlsFromYoutube(
+          state.urls[index],
+          false
+        );
+
+        final url = await getUrlFromVideoQualityUrls(
+          qualityList: [1080, 720, 360],
+          videoUrls: urls,
+        );
+
+          final CachedVideoPlayerPlusController _controller =
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(url));
+
+                /// Add to [controllers] list
+          state.controllers[index] = _controller;
+
+          /// Initialize
+          await _controller.initialize();
+
+          log('🚀🚀🚀 INITIALIZED Youtube $index');
+
+       } else {
+
+             final CachedVideoPlayerPlusController _controller =
           CachedVideoPlayerPlusController.networkUrl(Uri.parse(state.urls[index]));
 
-      /// Add to [controllers] list
-      state.controllers[index] = _controller;
+                /// Add to [controllers] list
+          state.controllers[index] = _controller;
 
-      /// Initialize
-      await _controller.initialize();
+          /// Initialize
+          await _controller.initialize();
 
-      log('🚀🚀🚀 INITIALIZED $index');
+          log('🚀🚀🚀 INITIALIZED $index');
+       }
+    
     }
   }
+
+ 
+  List<VideoQalityUrls> sortQualityVideoUrls(
+    List<VideoQalityUrls>? urls,
+  ) {
+    final urls0 = urls;
+
+    ///has issues with 240p
+    urls0?.removeWhere((element) => element.quality == 240);
+
+    ///has issues with 144p in web
+    // if (kIsWeb) {
+    //   urls0?.removeWhere((element) => element.quality == 144);
+    // }
+
+    ///sort
+    urls0?.sort((a, b) => a.quality.compareTo(b.quality));
+
+    ///
+    return urls0 ?? [];
+  }
+
+  Future<String> getUrlFromVideoQualityUrls({
+    required List<int> qualityList,
+    required List<VideoQalityUrls> videoUrls,
+  }) async {
+    final videoUrl = await sortQualityVideoUrls(videoUrls);
+
+    VideoQalityUrls? urlWithQuality;
+    final fallback = videoUrl[0];
+    for (final quality in qualityList) {
+      urlWithQuality = videoUrl.firstWhere(
+        (url) => url.quality == quality,
+        orElse: () => fallback,
+      );
+
+      if (urlWithQuality != fallback) {
+        break;
+      }
+    }
+
+    urlWithQuality ??= fallback;
+     var _videoQualityUrl = urlWithQuality.url;
+    return _videoQualityUrl;
+  }
+
 
   void _playControllerAtIndex(int index) {
     if (state.urls.length > index && index >= 0) {
