@@ -82,19 +82,21 @@ class PreloadProvider extends ChangeNotifier {
 
     if (_urls.length > index && index >= 0) {
       /// Create new controller
-        if (urls[index].contains(RegExp('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?\$'))) {
-           var urlss  = await  getVideoQualityUrlsFromYoutube(
-          PlayVideoFrom.youtube(urls[index]).dataSource ?? "",
+        if (_urls[index].contains(RegExp('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?\$'))) {
+          
+          
+          var urlss = await  getVideoQualityUrlsFromYoutube(
+          PlayVideoFrom.youtube(_urls[index]).dataSource ?? "",
           false
         );
 
-        final url = await getUrlFromVideoQualityUrls(
-          qualityList: [1080, 720, 360],
+        final youtubeurl = await getUrlFromVideoQualityUrls(
+          qualityList: [ 720, 360],
           videoUrls: urlss,
         );
 
           final CachedVideoPlayerPlusController _controller =
-          CachedVideoPlayerPlusController.networkUrl(Uri.parse(url));
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl));
 
                 /// Add to [controllers] list
           controllers[index] = _controller;
@@ -107,7 +109,7 @@ class PreloadProvider extends ChangeNotifier {
        } else {
 
              final CachedVideoPlayerPlusController _controller =
-          CachedVideoPlayerPlusController.networkUrl(Uri.parse(urls[index]));
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(_urls[index]));
 
                 /// Add to [controllers] list
           controllers[index] = _controller;
