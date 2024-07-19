@@ -82,8 +82,7 @@ class PreloadProvider extends ChangeNotifier {
 
     if (_urls.length > index && index >= 0) {
       /// Create new controller
-        if (_urls[index].contains(RegExp('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?\$'))) {
-          
+        if (_urls[index].contains('youtube') || _urls[index].contains('youtu.be')) {
           
           var urlss = await  getVideoQualityUrlsFromYoutube(
           PlayVideoFrom.youtube(_urls[index]).dataSource ?? "",
