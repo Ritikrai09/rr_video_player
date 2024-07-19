@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_preload_videos/models/play_video_from.dart';
 import 'package:flutter_preload_videos/models/vimeo_models.dart';
 import 'package:flutter_preload_videos/video_apis.dart';
 
@@ -78,12 +79,12 @@ class PreloadProvider extends ChangeNotifier {
   }
 
   Future _initializeControllerAtIndex(int index) async {
-    
+
     if (_urls.length > index && index >= 0) {
       /// Create new controller
         if (urls[index].contains(RegExp('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?\$'))) {
            var urlss  = await  getVideoQualityUrlsFromYoutube(
-          urls[index],
+          PlayVideoFrom.youtube(urls[index]).dataSource ?? "",
           false
         );
 
