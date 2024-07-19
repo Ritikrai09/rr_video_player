@@ -117,6 +117,8 @@ class PreloadProvider extends ChangeNotifier {
 
           _controller.setVolume(_isMute == true ? 0 : 100);
 
+           _controller.pause();
+
                 /// Add to [controllers] list
           controllers[index] = _controller;
 
@@ -165,7 +167,8 @@ class PreloadProvider extends ChangeNotifier {
     if (_urls.length > index && index >= 0) {
       /// Get controller at [index]
       final CachedVideoPlayerPlusController _controller = _controllers[index]!;
-
+      
+      _controller.setVolume(_isMute == true ? 0 : 100);
       /// Play controller
       _controller.play();
 
@@ -238,11 +241,13 @@ class PreloadProvider extends ChangeNotifier {
     /// Initialize 1st video
     await _initializeControllerAtIndex(0);
 
-    /// Play 1st video
-    _playControllerAtIndex(0);
 
     /// Initialize 2nd vide
     await _initializeControllerAtIndex(1);
+  }
+
+  Future playVideoAtIndex(int? index) async {
+    _playControllerAtIndex(index ?? 0);
   }
 
   void onVideoIndexChanged(int index) {
