@@ -10,8 +10,14 @@ class PreloadProvider extends ChangeNotifier {
 
   List<String> _urls = const [];
   
-  bool looping = false;
+  bool _looping = false;
 
+  get getLoop => _looping;
+  
+  set setLooping (bool loop){
+    _looping = loop;
+    notifyListeners();
+  } 
 
   bool _isMute = false;
 
@@ -113,7 +119,7 @@ class PreloadProvider extends ChangeNotifier {
           final CachedVideoPlayerPlusController _controller =
           CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl));
 
-          _controller.setLooping(looping);
+          _controller.setLooping(_looping);
 
           _controller.setVolume(_isMute == true ? 0 : 100);
 
@@ -248,6 +254,10 @@ class PreloadProvider extends ChangeNotifier {
 
   Future playVideoAtIndex(int? index) async {
     _playControllerAtIndex(index ?? 0);
+  }
+
+    Future pauseVideoAtIndex(int? index) async {
+    _stopControllerAtIndex(index ?? 0);
   }
 
   void onVideoIndexChanged(int index) {
