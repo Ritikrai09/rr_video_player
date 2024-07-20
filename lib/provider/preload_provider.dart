@@ -243,9 +243,9 @@ class PreloadProvider extends ChangeNotifier {
     if(index < _urls.length-2){
       _initializeControllerAtIndex(index + 1);
     }
-     if(index < _urls.length-3){
-      _initializeControllerAtIndex(index + 2);
-     }
+    //  if(index < _urls.length-3){
+    //   _initializeControllerAtIndex(index + 2);
+    //  }
   }
 
   void _playPrevious(int index) {
@@ -259,12 +259,12 @@ class PreloadProvider extends ChangeNotifier {
     _playControllerAtIndex(index);
 
     /// Initialize [index - 1] controller
-    if(index > 1){
+    if(index > 0){
       _initializeControllerAtIndex(index - 1);
     }
-     if(index > 2){
-      _initializeControllerAtIndex(index - 2);
-     }
+    //  if(index > 2){
+    //   _initializeControllerAtIndex(index - 2);
+    //  }
   }
  
 
