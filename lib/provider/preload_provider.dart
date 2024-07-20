@@ -10,7 +10,7 @@ class PreloadProvider extends ChangeNotifier {
 
   List<String> _urls = const [];
   
-  bool _looping = false;
+  bool _looping = true;
 
   get getLoop => _looping;
   
@@ -197,6 +197,18 @@ class PreloadProvider extends ChangeNotifier {
     }
   }
 
+   void _pauseControllerAtIndex(int index) {
+    if (_urls.length > index && index >= 0) {
+      /// Get controller at [index]
+      final CachedVideoPlayerPlusController _controller = _controllers[index]!;
+
+      /// Pause
+      _controller.pause();
+
+      log('🚀🚀🚀 Paused $index');
+    }
+  }
+
   void _disposeControllerAtIndex(int index) {
     if (_urls.length > index && index >= 0) {
       /// Get controller at [index]
@@ -256,8 +268,8 @@ class PreloadProvider extends ChangeNotifier {
     _playControllerAtIndex(index ?? 0);
   }
 
-    Future pauseVideoAtIndex(int? index) async {
-    _stopControllerAtIndex(index ?? 0);
+  Future pauseVideoAtIndex(int? index) async {
+    _pauseControllerAtIndex(index ?? 0);
   }
 
   void onVideoIndexChanged(int index) {
