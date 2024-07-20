@@ -189,7 +189,7 @@ class PreloadProvider extends ChangeNotifier {
   }
 
   void _stopControllerAtIndex(int index) {
-    if (_urls.length > index && index >= 0) {
+    if (_urls.length > index && index >= 0 && _controllers[index] != null) {
       /// Get controller at [index]
       final CachedVideoPlayerPlusController _controller = _controllers[index]!;
 
