@@ -197,7 +197,7 @@ class PreloadProvider extends ChangeNotifier {
       _controller.pause();
 
       /// Reset postiton to beginning
-      _controller.seekTo(const Duration());
+      // _controller.seekTo(const Duration());
 
       log('🚀🚀🚀 STOPPED $index');
     }
@@ -240,7 +240,7 @@ class PreloadProvider extends ChangeNotifier {
     _playControllerAtIndex(index);
 
     /// Initialize [index + 1] controller
-    if(index < _urls.length-2){
+    if(index < _urls.length-1){
       _initializeControllerAtIndex(index + 1);
     }
     //  if(index < _urls.length-3){
