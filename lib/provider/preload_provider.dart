@@ -161,6 +161,12 @@ class PreloadProvider extends ChangeNotifier {
                 /// Add to [controllers] list
           controllers[index] = _controller;
 
+           _controller.setLooping(_looping);
+
+          _controller.setVolume(_isMute == true ? 0 : 100);
+
+           _controller.pause();
+
           /// Initialize
           await _controller.initialize();
 
@@ -234,7 +240,12 @@ class PreloadProvider extends ChangeNotifier {
     _playControllerAtIndex(index);
 
     /// Initialize [index + 1] controller
-    _initializeControllerAtIndex(index + 1);
+    if(index < _urls.length-2){
+      _initializeControllerAtIndex(index + 1);
+    }
+     if(index < _urls.length-3){
+      _initializeControllerAtIndex(index + 2);
+     }
   }
 
   void _playPrevious(int index) {
@@ -248,7 +259,12 @@ class PreloadProvider extends ChangeNotifier {
     _playControllerAtIndex(index);
 
     /// Initialize [index - 1] controller
-    _initializeControllerAtIndex(index - 1);
+    if(index > 1){
+      _initializeControllerAtIndex(index - 1);
+    }
+     if(index > 2){
+      _initializeControllerAtIndex(index - 2);
+     }
   }
  
 
