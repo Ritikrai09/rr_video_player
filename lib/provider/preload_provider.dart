@@ -112,7 +112,7 @@ class PreloadProvider extends ChangeNotifier {
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [ 720, 360],
+          qualityList: [1080, 720, 480 ,360],
           videoUrls: urlss,
         );
 
