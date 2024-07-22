@@ -117,7 +117,8 @@ class PreloadProvider extends ChangeNotifier {
         );
 
           final CachedVideoPlayerPlusController _controller =
-          CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl));
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
+          invalidateCacheIfOlderThan: Duration(days: 15));
 
           _controller.setLooping(_looping);
 
@@ -156,7 +157,8 @@ class PreloadProvider extends ChangeNotifier {
        } else {
 
              final CachedVideoPlayerPlusController _controller =
-          CachedVideoPlayerPlusController.networkUrl(Uri.parse(_urls[index]));
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(_urls[index]),
+           invalidateCacheIfOlderThan: Duration(days: 15));
 
                 /// Add to [controllers] list
           controllers[index] = _controller;
