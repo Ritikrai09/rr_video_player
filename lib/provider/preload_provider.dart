@@ -173,9 +173,9 @@ class PreloadProvider extends ChangeNotifier {
   }
 
   void _playControllerAtIndex(int index) {
-    if (_urls.length > index && index >= 0) {
+    if (_urls.length > index && index >= 0 && _controllers[index] != null) {
       /// Get controller at [index]
-      final CachedVideoPlayerPlusController _controller = _controllers[index]!;
+      final CachedVideoPlayerPlusController _controller = _controllers[index] as CachedVideoPlayerPlusController;
       
       _controller.setVolume(_isMute == true ? 0 : 100);
       /// Play controller
@@ -250,7 +250,7 @@ class PreloadProvider extends ChangeNotifier {
     _stopControllerAtIndex(index + 1);
 
     /// Dispose [index + 2] controller
-    _disposeControllerAtIndex(index + 3);
+    _disposeControllerAtIndex(index + 2);
 
     /// Play current video (already initialized)
     _playControllerAtIndex(index);
