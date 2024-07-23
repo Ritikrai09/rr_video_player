@@ -37,6 +37,11 @@ class PreloadProvider extends ChangeNotifier {
         notifyListeners();
     }
 
+    set updateUrls(List<String> videoUrls){
+        _urls.addAll(videoUrls);
+        notifyListeners();
+    }
+
   final Map<int, CachedVideoPlayerPlusController> _controllers = {};
   Map<int, CachedVideoPlayerPlusController> get controllers => _controllers;
 
