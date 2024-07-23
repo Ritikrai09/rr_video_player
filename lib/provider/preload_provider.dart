@@ -4,8 +4,7 @@ import 'dart:developer';
 import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_preload_videos/models/play_video_from.dart';
-import 'package:flutter_preload_videos/models/vimeo_models.dart';
-import 'package:flutter_preload_videos/video_apis.dart';
+import 'package:flutter_preload_videos/video_extraction.dart';
 
 class PreloadProvider extends ChangeNotifier {
 
@@ -75,62 +74,6 @@ class PreloadProvider extends ChangeNotifier {
 
   int get focusedIndex => _focusedIndex;
 
-  
-  Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
-    String youtubeIdOrUrl,
-    bool live,
-  ) async {
-    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live) ??
-        [];
-  }
-
-
-  List<VideoQalityUrls> sortQualityVideoUrls(
-    List<VideoQalityUrls>? urls,
-  ) {
-    final urls0 = urls;
-
-    ///has issues with 240p
-    urls0?.removeWhere((element) => element.quality == 240);
-
-    ///has issues with 144p in web
-    // if (kIsWeb) {
-    //   urls0?.removeWhere((element) => element.quality == 144);
-    // }
-
-    ///sort
-    urls0?.sort((a, b) => a.quality.compareTo(b.quality));
-
-    ///
-    return urls0 ?? [];
-  }
-
-  Future<String> getUrlFromVideoQualityUrls({
-    required List<int> qualityList,
-    required List<VideoQalityUrls> videoUrls,
-  }) async {
-
-    final videoUrl = await sortQualityVideoUrls(videoUrls);
-
-    VideoQalityUrls? urlWithQuality;
-    final fallback = videoUrl[0];
-    for (final quality in qualityList) {
-      urlWithQuality = videoUrl.firstWhere(
-        (url) => url.quality == quality,
-        orElse: () => fallback,
-      );
-
-      if (urlWithQuality != fallback) {
-        break;
-      }
-    }
-
-    urlWithQuality ??= fallback;
-     var _videoQualityUrl = urlWithQuality.url;
-    return _videoQualityUrl;
-  }
-
-
   // Future disposeNormalVideo({required int index, required int id}) async {
   //     if (_postAndLiveVideos.length > index && index >= 0 && postLiveControllers[id] != null) {
   //     /// Get controller at [index]
@@ -143,7 +86,7 @@ class PreloadProvider extends ChangeNotifier {
 
   //     postLiveControllers[id] = null;
 
-  //     log('🚀🚀🚀 DISPOSED Post Video $index');
+  //     log(' DISPOSED Post Video $index');
   //   }
   // }
 
@@ -189,7 +132,7 @@ class PreloadProvider extends ChangeNotifier {
   //         /// Initialize
   //         await _controller.initialize();
 
-  //         log('🚀🚀🚀 INITIALIZED $index');
+  //         log(' INITIALIZED $index');
   //     }
   // }
 
@@ -263,69 +206,6 @@ class PreloadProvider extends ChangeNotifier {
   }
 
 
-  Future<CachedVideoPlayerPlusController> playYoutubeVideo({
-  required String url, bool isLive =false, Duration? cacheDuration}) async {
-
-     CachedVideoPlayerPlusController _controller;
-
-     var urlss = await  getVideoQualityUrlsFromYoutube(
-          PlayVideoFrom.youtube(url).dataSource ?? "",
-          isLive
-        );
-
-        final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [480 ,360],
-          videoUrls: urlss,
-        );
-
-          _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
-          invalidateCacheIfOlderThan: cacheDuration ?? Duration(days: 15));
-
-          _controller.setLooping(_looping);
-
-          _controller.setVolume(_isMute == true ? 0 : 100);
-
-          /// Initialize
-          await _controller.initialize();
-          
-          return  _controller;
-
-  }
-
-
-
-  Future<CachedVideoPlayerPlusController> playNormalVideo({
-    required String url, 
-    bool isLive =false, 
-    Duration cacheDuration = const Duration(days: 15),
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
-    Map<String, String> httpHeaders = const <String, String>{},
-  }) async {
-
-      CachedVideoPlayerPlusController _controller;
-
-      _controller = CachedVideoPlayerPlusController.networkUrl(
-      Uri.parse(url), 
-      formatHint:formatHint,
-      closedCaptionFile : closedCaptionFile,
-      videoPlayerOptions : videoPlayerOptions,
-      httpHeaders : httpHeaders,
-      invalidateCacheIfOlderThan: cacheDuration);
-
-      _controller.setLooping(_looping);
-
-      _controller.setVolume(_isMute == true ? 0 : 100);
-          /// Add to [controllers] list
-    // controllers[index] = _controller;
-
-    /// Initialize
-    await _controller.initialize();
-    
-    return  _controller;
-
-  }
 
   // void _playPostLiveControllerAtIndex(int index, int id) {
 
@@ -337,7 +217,7 @@ class PreloadProvider extends ChangeNotifier {
   //     /// Play controller
   //     _controller.play();
 
-  //     log('🚀🚀🚀 PLAYING $index');
+  //     log(' PLAYING $index');
   //   }
   // }
 
@@ -376,7 +256,7 @@ class PreloadProvider extends ChangeNotifier {
   //     /// Pause
   //     _controller.pause();
 
-  //     log('🚀🚀🚀 Paused $index');
+  //     log(' Paused $index');
   //   }
   // }
 
