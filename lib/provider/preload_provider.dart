@@ -38,12 +38,12 @@ class PreloadProvider extends ChangeNotifier {
     }
 
     set updateUrls(List<String> videoUrls){
-        _urls.addAll(videoUrls);
+        _urls.addAll(videoUrls.toSet().toList());
         notifyListeners();
     }
 
-  final Map<int, CachedVideoPlayerPlusController> _controllers = {};
-  Map<int, CachedVideoPlayerPlusController> get controllers => _controllers;
+  final Map<int, CachedVideoPlayerPlusController?> _controllers = {};
+  Map<int, CachedVideoPlayerPlusController?> get controllers => _controllers;
 
   int _focusedIndex = 0;
   int get focusedIndex => _focusedIndex;
@@ -221,14 +221,16 @@ class PreloadProvider extends ChangeNotifier {
   }
 
   void _disposeControllerAtIndex(int index) {
-    if (_urls.length > index && index >= 0 && _controllers[index] != null) {
+    if (_urls.length > index && index >= 0 && controllers[index] != null) {
       /// Get controller at [index]
-      final CachedVideoPlayerPlusController _controller = _controllers[index] as CachedVideoPlayerPlusController;
+      final CachedVideoPlayerPlusController _controller = controllers[index] as CachedVideoPlayerPlusController;
 
       /// Dispose controller
       _controller.dispose();
 
-      _controllers.remove(_controller);
+      controllers.remove(_controller);
+
+      controllers[index] = null;
 
       log('🚀🚀🚀 DISPOSED $index');
     }
