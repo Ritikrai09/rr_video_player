@@ -263,7 +263,7 @@ class PreloadProvider extends ChangeNotifier {
   }
 
 
-Future<CachedVideoPlayerPlusController> playYoutubeVideo({
+  Future<CachedVideoPlayerPlusController> playYoutubeVideo({
   required String url, bool isLive =false, Duration? cacheDuration}) async {
 
      CachedVideoPlayerPlusController _controller;
@@ -294,14 +294,14 @@ Future<CachedVideoPlayerPlusController> playYoutubeVideo({
 
 
 
-Future<CachedVideoPlayerPlusController> playNormalVideo({
-  required String url, 
-  bool isLive =false, 
-  Duration cacheDuration = const Duration(days: 15),
-  VideoFormat? formatHint,
-  Future<ClosedCaptionFile>? closedCaptionFile,
-  VideoPlayerOptions? videoPlayerOptions,
-  Map<String, String> httpHeaders = const <String, String>{},
+  Future<CachedVideoPlayerPlusController> playNormalVideo({
+    required String url, 
+    bool isLive =false, 
+    Duration cacheDuration = const Duration(days: 15),
+    VideoFormat? formatHint,
+    Future<ClosedCaptionFile>? closedCaptionFile,
+    VideoPlayerOptions? videoPlayerOptions,
+    Map<String, String> httpHeaders = const <String, String>{},
   }) async {
 
       CachedVideoPlayerPlusController _controller;
