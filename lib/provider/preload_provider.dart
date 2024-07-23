@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cached_video_player_plus/cached_video_player_plus.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_preload_videos/video_apis.dart';
 class PreloadProvider extends ChangeNotifier {
 
   List<String> _urls = const [];
+
+  //  List<String> _postAndLiveVideos = const [];
   
   bool _looping = true;
 
@@ -30,7 +33,7 @@ class PreloadProvider extends ChangeNotifier {
   }
 
 
-  List<String> get urls => _urls;
+// ----------- Shorts Video -------------
 
     set urls(List<String> videoUrls){
         _urls = videoUrls;
@@ -42,10 +45,34 @@ class PreloadProvider extends ChangeNotifier {
         notifyListeners();
     }
 
-  final Map<int, CachedVideoPlayerPlusController?> _controllers = {};
-  Map<int, CachedVideoPlayerPlusController?> get controllers => _controllers;
+     List<String> get urls => _urls;
+     
+    final Map<int, CachedVideoPlayerPlusController?> _controllers = {};
+
+    Map<int, CachedVideoPlayerPlusController?> get controllers => _controllers;
+
+   
+// ----------- Post And Live Videos -------------
+
+    // set postAndLiveUrls(List<String> videoUrls){
+    //     _postAndLiveVideos = videoUrls;
+    //     notifyListeners();
+    // }
+
+    // set updatePostAndLiveUrls(List<String> videoUrls){
+    //     _postAndLiveVideos.addAll(videoUrls.toSet().toList());
+    //     notifyListeners();
+    // }
+
+    //  List<String> get getPostAndLiveVideos => _postAndLiveVideos;
+
+    // final Map<int, CachedVideoPlayerPlusController?> _postAndLiveVideoControllers = {};
+
+    //  Map<int, CachedVideoPlayerPlusController?> get postLiveControllers => _postAndLiveVideoControllers;
+
 
   int _focusedIndex = 0;
+
   int get focusedIndex => _focusedIndex;
 
   
@@ -103,7 +130,69 @@ class PreloadProvider extends ChangeNotifier {
     return _videoQualityUrl;
   }
 
+
+  // Future disposeNormalVideo({required int index, required int id}) async {
+  //     if (_postAndLiveVideos.length > index && index >= 0 && postLiveControllers[id] != null) {
+  //     /// Get controller at [index]
+  //     final CachedVideoPlayerPlusController _controller = postLiveControllers[id] as CachedVideoPlayerPlusController;
+
+  //     /// Dispose controller
+  //     _controller.dispose();
+
+  //     postLiveControllers.remove(_controller);
+
+  //     postLiveControllers[id] = null;
+
+  //     log('🚀🚀🚀 DISPOSED Post Video $index');
+  //   }
+  // }
+
+
   
+  // Future _initializeNormalVideos({ bool isLive=false, required int index, required int id, Duration? durationCache}) async {
+
+  //   if (_postAndLiveVideos.length > index && index >= 0) {
+  //     /// Create new controller
+  //      CachedVideoPlayerPlusController _controller;
+
+  //       if (_postAndLiveVideos[index].contains('youtube') || _postAndLiveVideos[index].contains('youtu.be')) {
+          
+  //         var urlss = await  getVideoQualityUrlsFromYoutube(
+  //         PlayVideoFrom.youtube(_postAndLiveVideos[index]).dataSource ?? "",
+  //         isLive
+  //       );
+
+  //       final youtubeurl = await getUrlFromVideoQualityUrls(
+  //         qualityList: [480 ,360],
+  //         videoUrls: urlss,
+  //       );
+
+  //          _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
+  //         invalidateCacheIfOlderThan:durationCache ?? Duration(days: 15));
+
+
+  //      } else {
+
+  //        _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(_postAndLiveVideos[index]),
+  //          invalidateCacheIfOlderThan:durationCache ?? Duration(days: 15));
+
+  //      }
+
+
+  //         _controller.setLooping(_looping);
+
+  //         _controller.setVolume(_isMute == true ? 0 : 100);
+
+  //               /// Add to [controllers] list
+  //         controllers[id] = _controller;
+
+  //         /// Initialize
+  //         await _controller.initialize();
+
+  //         log('🚀🚀🚀 INITIALIZED $index');
+  //     }
+  // }
+
 
   Future _initializeControllerAtIndex(int index) async {
 
@@ -117,7 +206,7 @@ class PreloadProvider extends ChangeNotifier {
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [1080, 720, 480 ,360],
+          qualityList: [480 ,360],
           videoUrls: urlss,
         );
 
@@ -136,26 +225,6 @@ class PreloadProvider extends ChangeNotifier {
 
           /// Initialize
           await _controller.initialize();
-
-        // int dur = controllers[index]!.value.duration.inMilliseconds;
-        // int pos = controllers[index]!.value.position.inMilliseconds;
-        // int buf = controllers[index]!.value.buffered.last.end.inMilliseconds;
-     
-        //  var _position,_buffer;
-       
-        //   if (dur <= pos) {
-        //    _position = 0;
-        //     return;
-        //   }
-
-        //   _position = pos / dur;
-        //   _buffer = buf / dur;
-       
-        // if (dur - pos < 1) {
-        //   if (index < _urls.length - 1) {
-        //     _playControllerAtIndex(index+1);
-        //   }
-        // }
 
           log('🚀🚀🚀 INITIALIZED Youtube $index');
 
@@ -193,6 +262,85 @@ class PreloadProvider extends ChangeNotifier {
     }
   }
 
+
+Future<CachedVideoPlayerPlusController> playYoutubeVideo({
+  required String url, bool isLive =false, Duration? cacheDuration}) async {
+
+     CachedVideoPlayerPlusController _controller;
+
+     var urlss = await  getVideoQualityUrlsFromYoutube(
+          PlayVideoFrom.youtube(url).dataSource ?? "",
+          isLive
+        );
+
+        final youtubeurl = await getUrlFromVideoQualityUrls(
+          qualityList: [480 ,360],
+          videoUrls: urlss,
+        );
+
+          _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
+          invalidateCacheIfOlderThan: cacheDuration ?? Duration(days: 15));
+
+          _controller.setLooping(_looping);
+
+          _controller.setVolume(_isMute == true ? 0 : 100);
+
+          /// Initialize
+          await _controller.initialize();
+          
+          return  _controller;
+
+  }
+
+
+
+Future<CachedVideoPlayerPlusController> playNormalVideo({
+  required String url, 
+  bool isLive =false, 
+  Duration cacheDuration = const Duration(days: 15),
+  VideoFormat? formatHint,
+  Future<ClosedCaptionFile>? closedCaptionFile,
+  VideoPlayerOptions? videoPlayerOptions,
+  Map<String, String> httpHeaders = const <String, String>{},
+  }) async {
+
+      CachedVideoPlayerPlusController _controller;
+
+      _controller = CachedVideoPlayerPlusController.networkUrl(
+      Uri.parse(url), 
+      formatHint:formatHint,
+      closedCaptionFile : closedCaptionFile,
+      videoPlayerOptions : videoPlayerOptions,
+      httpHeaders : httpHeaders,
+      invalidateCacheIfOlderThan: cacheDuration);
+
+      _controller.setLooping(_looping);
+
+      _controller.setVolume(_isMute == true ? 0 : 100);
+          /// Add to [controllers] list
+    // controllers[index] = _controller;
+
+    /// Initialize
+    await _controller.initialize();
+    
+    return  _controller;
+
+  }
+
+  // void _playPostLiveControllerAtIndex(int index, int id) {
+
+  //   if (_postAndLiveVideos.length > index && index >= 0 && _controllers[index] != null) {
+  //     /// Get controller at [index]
+  //     final CachedVideoPlayerPlusController _controller = _postAndLiveVideoControllers[id]!;
+      
+  //     _controller.setVolume(_isMute == true ? 0 : 100);
+  //     /// Play controller
+  //     _controller.play();
+
+  //     log('🚀🚀🚀 PLAYING $index');
+  //   }
+  // }
+
   void _stopControllerAtIndex(int index) {
     if (_urls.length > index && index >= 0 && _controllers[index] != null) {
       /// Get controller at [index]
@@ -219,6 +367,18 @@ class PreloadProvider extends ChangeNotifier {
       log('🚀🚀🚀 Paused $index');
     }
   }
+
+  //  void _postOrLivePauseControllerAtIndex(int index, int id) {
+  //   if (_postAndLiveVideos.length > index && index >= 0) {
+  //     /// Get live or post controller at [index]
+  //     final CachedVideoPlayerPlusController _controller = _postAndLiveVideoControllers[id]!;
+
+  //     /// Pause
+  //     _controller.pause();
+
+  //     log('🚀🚀🚀 Paused $index');
+  //   }
+  // }
 
   void _disposeControllerAtIndex(int index) {
     if (_urls.length > index && index >= 0 && controllers[index] != null) {
@@ -295,6 +455,23 @@ class PreloadProvider extends ChangeNotifier {
     _pauseControllerAtIndex(index ?? 0);
   }
 
+
+
+  // Future<void> initializePostorLiveVideo({required int index, required int id}) async {
+  //   /// Initialize 1st video
+  //   await _initializeNormalVideos(index: 0,id: id);
+
+  // }
+
+  // Future postOrLivePlayVideoAtIndex(int index,int id) async {
+  //   _playPostLiveControllerAtIndex(index, id);
+  // }
+
+  // Future pausetOrLivePlayVideoAtIndex(int index, int id) async {
+  //   _postOrLivePauseControllerAtIndex(index ,id);
+  // }
+
+
   void onVideoIndexChanged(int index) {
     if (index > _focusedIndex) {
       _playNext(index);
@@ -304,4 +481,5 @@ class PreloadProvider extends ChangeNotifier {
     _focusedIndex = index;
     notifyListeners();
   }
+
 }
