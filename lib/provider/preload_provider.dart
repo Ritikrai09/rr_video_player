@@ -149,7 +149,7 @@ class PreloadProvider extends ChangeNotifier {
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [480 ,360],
+          qualityList: [720, 480, 360],
           videoUrls: urlss,
         );
 
@@ -160,8 +160,6 @@ class PreloadProvider extends ChangeNotifier {
           _controller.setLooping(_looping);
 
           _controller.setVolume(_isMute == true ? 0 : 100);
-
-           _controller.pause();
 
                 /// Add to [controllers] list
           controllers[index] = _controller;
