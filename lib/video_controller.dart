@@ -15,7 +15,7 @@ class CacheVideoController {
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [480 ,360],
+          qualityList: [ 720, 480 ,360],
           videoUrls: urlss,
         );
 

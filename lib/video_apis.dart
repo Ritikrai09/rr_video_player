@@ -148,6 +148,12 @@ class VideoApis {
             ),
           ),
         );
+
+        log("manifest.toString()");
+        log(manifest.toString());
+
+        log("URL.toString()");
+        log(urls.toString());
       }
       // Close the YoutubeExplode's http client.
       yt.close();

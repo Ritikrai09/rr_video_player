@@ -1,4 +1,6 @@
-  import 'package:flutter_preload_videos/models/vimeo_models.dart';
+  import 'dart:developer';
+
+import 'package:flutter_preload_videos/models/vimeo_models.dart';
 import 'package:flutter_preload_videos/video_apis.dart';
 
 Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
@@ -25,7 +27,8 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
 
     ///sort
     urls0?.sort((a, b) => a.quality.compareTo(b.quality));
-
+     
+     log(urls0.toString());
     ///
     return urls0 ?? [];
   }
