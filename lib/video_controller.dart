@@ -22,17 +22,18 @@ class CacheVideoController {
 
           _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
           invalidateCacheIfOlderThan: cacheDuration ?? Duration(days: 7));
-                
+          
+          _controller.setLooping(true);
+
           if(setDuration != null){
             _controller.seekTo(setDuration);
           }
-
-          _controller.setLooping(true);
-
           // _controller.setVolume(_isMute == true ? 0 : 100);
 
           /// Initialize
           await _controller.initialize();
+
+          _controller.play();
           
           return  _controller;
 
