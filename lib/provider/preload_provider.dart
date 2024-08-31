@@ -11,10 +11,20 @@ class PreloadProvider extends ChangeNotifier {
   List<String> _urls = const [];
 
   //  List<String> _postAndLiveVideos = const [];
+  List<int> qualityUrls = [];
   
   bool _looping = true;
 
   get getLoop => _looping;
+
+  int videoQuality = 480;
+
+  get getVideoQuality => videoQuality;
+
+  set setVideoQuality (int setQuality){
+    videoQuality = setQuality;
+    notifyListeners();
+  } 
   
   set setLooping (bool loop){
     _looping = loop;
@@ -149,8 +159,9 @@ class PreloadProvider extends ChangeNotifier {
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
-          qualityList: [ 480, 360, 240],
+          qualityList: [ 720, 480, 360, 240],
           videoUrls: urlss,
+          initQuality : 360
         );
 
           final CachedVideoPlayerPlusController _controller =

@@ -1,5 +1,3 @@
-  import 'dart:developer';
-
 import 'package:flutter_preload_videos/models/vimeo_models.dart';
 import 'package:flutter_preload_videos/video_apis.dart';
 
@@ -28,7 +26,6 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
     ///sort
     urls0?.sort((a, b) => a.quality.compareTo(b.quality));
      
-     log(urls0.toString());
     ///
     return urls0 ?? [];
   }
@@ -36,15 +33,17 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
   Future<String> getUrlFromVideoQualityUrls({
     required List<int> qualityList,
     required List<VideoQalityUrls> videoUrls,
+    required int initQuality
   }) async {
 
     final videoUrl = await sortQualityVideoUrls(videoUrls);
+
 
     VideoQalityUrls? urlWithQuality;
     final fallback = videoUrl[0];
     for (final quality in qualityList) {
       urlWithQuality = videoUrl.firstWhere(
-        (url) => url.quality == quality,
+        (url) => url.quality == initQuality,
         orElse: () => fallback,
       );
 

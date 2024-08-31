@@ -140,6 +140,8 @@ class VideoApis {
       } else {
         final manifest =
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
+
+        
         urls.addAll(
           manifest.muxed.map(
             (element) => VideoQalityUrls(
@@ -148,7 +150,7 @@ class VideoApis {
             ),
           ),
         );
-
+         log(urls.toString());
         // log("manifest.toString()");
         // log(manifest.toString());
 
