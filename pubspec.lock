@@ -830,12 +830,13 @@ packages:
     source: hosted
     version: "3.1.0"
   youtube_explode_dart:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
-      name: youtube_explode_dart
-      sha256: "26c9671d638f3396a1bfb2666f586988ee7b0ba3469e478b22a4c1a168bcf6ee"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "1c2c71ea99b85886c7d28b48039d3df388ecf776"
+      url: "https://github.com/Ritikrai09/rr_youtube_video.git"
+    source: git
     version: "2.2.1"
 sdks:
   dart: ">=3.4.0 <4.0.0"

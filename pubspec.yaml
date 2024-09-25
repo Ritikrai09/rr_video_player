@@ -27,7 +27,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   provider: ^6.0.1
   cached_video_player_plus:
-  youtube_explode_dart: ^2.2.1
+  # youtube_explode_dart: ^2.2.1
 
 dev_dependencies:
   build_runner: any
@@ -35,6 +35,10 @@ dev_dependencies:
     sdk: flutter
   freezed: any
 
+dependency_overrides:
+  youtube_explode_dart:
+    git:
+      url: https://github.com/Ritikrai09/rr_youtube_video.git
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
