@@ -138,9 +138,9 @@ class VideoApis {
           ),
         );
       } else {
+        
         final manifest =
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
-
         
         urls.addAll(
           manifest.muxed.map(
