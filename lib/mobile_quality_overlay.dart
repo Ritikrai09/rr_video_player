@@ -21,7 +21,6 @@ class VideoQualitySelectorMob extends StatelessWidget {
                 title: Text('${e}p'),
                 onTap: () {
                   onTap != null ? onTap!() : Navigator.of(context).pop();
-
                   // podCtr.changeVideoQuality(e.quality);
                 },
               ),
