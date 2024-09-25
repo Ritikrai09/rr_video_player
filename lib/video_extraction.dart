@@ -41,6 +41,7 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
 
     VideoQalityUrls? urlWithQuality;
     final fallback = videoUrl[0];
+    // ignore: unused_local_variable
     for (final quality in qualityList) {
       urlWithQuality = videoUrl.firstWhere(
         (url) => url.quality == initQuality,

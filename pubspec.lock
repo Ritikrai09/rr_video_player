@@ -833,8 +833,8 @@ packages:
     dependency: "direct overridden"
     description:
       path: "."
-      ref: "2e83a09"
-      resolved-ref: "2e83a09479add6db02ecc6668e450569870dc630"
+      ref: e8ee70d
+      resolved-ref: e8ee70d1ca84f20e1cc9a601a8872428c30d51f3
       url: "https://github.com/Ritikrai09/rr_youtube_video.git"
     source: git
     version: "2.2.1"
