@@ -19,7 +19,14 @@ class PreloadProvider extends ChangeNotifier {
 
   int videoQuality = 480;
 
+  String? apiKey;
+
   get getVideoQuality => videoQuality;
+
+  set setApiKey (String key){
+    apiKey = key;
+    notifyListeners();
+  }
 
   set setVideoQuality (int setQuality){
     videoQuality = setQuality;
@@ -155,7 +162,8 @@ class PreloadProvider extends ChangeNotifier {
           
           var urlss = await  getVideoQualityUrlsFromYoutube(
           PlayVideoFrom.youtube(_urls[index]).dataSource ?? "",
-          false
+          false,
+          apiKey:apiKey
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(

@@ -123,6 +123,7 @@ class VideoApis {
   static Future<List<VideoQalityUrls>?> getYoutubeVideoQualityUrls(
     String youtubeIdOrUrl,
     bool live,
+    {String? apiKey}
   ) async {
     try {
       final yt = YoutubeExplode();
@@ -140,7 +141,7 @@ class VideoApis {
       } else {
         
         final manifest =
-            await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
+            await yt.videos.streamsClient.getManifest(youtubeIdOrUrl, apiKey: apiKey);
         
         urls.addAll(
           manifest.muxed.map(

@@ -4,8 +4,9 @@ import 'package:flutter_preload_videos/video_apis.dart';
 Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
     String youtubeIdOrUrl,
     bool live,
+    {String? apiKey}
   ) async {
-    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live) ??
+    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live, apiKey:apiKey) ??
         [];
   }
 
