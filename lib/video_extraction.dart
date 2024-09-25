@@ -34,7 +34,7 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
   Future<String> getUrlFromVideoQualityUrls({
     required List<int> qualityList,
     required List<VideoQalityUrls> videoUrls,
-    required int initQuality
+    required int initQuality,
   }) async {
 
     final videoUrl = await sortQualityVideoUrls(videoUrls);

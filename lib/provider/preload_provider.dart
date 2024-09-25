@@ -154,7 +154,7 @@ class PreloadProvider extends ChangeNotifier {
   // }
 
 
-  Future _initializeControllerAtIndex(int index) async {
+  Future _initializeControllerAtIndex(int index,String apiKey) async {
 
     if (_urls.length > index && index >= 0) {
       /// Create new controller
@@ -169,7 +169,7 @@ class PreloadProvider extends ChangeNotifier {
         final youtubeurl = await getUrlFromVideoQualityUrls(
           qualityList: [ 720, 480, 360, 240],
           videoUrls: urlss,
-          initQuality : 360
+          initQuality : 360,
         );
 
           final CachedVideoPlayerPlusController _controller =
@@ -293,7 +293,7 @@ class PreloadProvider extends ChangeNotifier {
     }
   }
 
-  void _playNext(int index) {
+  void _playNext(int index,apiKey) {
     /// Stop [index - 1] controller
     _stopControllerAtIndex(index - 1);
 
@@ -305,14 +305,14 @@ class PreloadProvider extends ChangeNotifier {
 
     /// Initialize [index + 1] controller
     // if(index < _urls.length-1){
-      _initializeControllerAtIndex(index + 1);
+      _initializeControllerAtIndex(index + 1,apiKey);
     // }
     //  if(index < _urls.length-3){
     //   _initializeControllerAtIndex(index + 2);
     //  }
   }
 
-  void _playPrevious(int index) {
+  void _playPrevious(int index,String apiKey)  {
     /// Stop [index + 1] controller
     _stopControllerAtIndex(index + 1);
 
@@ -324,7 +324,7 @@ class PreloadProvider extends ChangeNotifier {
 
     /// Initialize [index - 1] controller
     // if(index > 0){
-      _initializeControllerAtIndex(index - 1);
+      _initializeControllerAtIndex(index - 1,apiKey);
     // }
     //  if(index > 2){
     //   _initializeControllerAtIndex(index - 2);
@@ -335,13 +335,13 @@ class PreloadProvider extends ChangeNotifier {
 
 
 
-  Future<void> initialize() async {
+  Future<void> initialize(String apiKey) async {
     /// Initialize 1st video
-    await _initializeControllerAtIndex(0);
+    await _initializeControllerAtIndex(0,apiKey);
 
 
     /// Initialize 2nd vide
-    await _initializeControllerAtIndex(1);
+    await _initializeControllerAtIndex(1,apiKey);
   }
 
   Future playVideoAtIndex(int? index) async {
@@ -369,11 +369,11 @@ class PreloadProvider extends ChangeNotifier {
   // }
 
 
-  void onVideoIndexChanged(int index) {
+  void onVideoIndexChanged(int index, String apiKey) {
     if (index > _focusedIndex) {
-      _playNext(index);
+      _playNext(index,apiKey);
     } else {
-      _playPrevious(index);
+      _playPrevious(index,apiKey);
     }
     _focusedIndex = index;
     notifyListeners();
