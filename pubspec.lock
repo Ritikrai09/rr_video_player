@@ -833,11 +833,11 @@ packages:
     dependency: "direct overridden"
     description:
       path: "."
-      ref: e8ee70d
-      resolved-ref: e8ee70d1ca84f20e1cc9a601a8872428c30d51f3
+      ref: c4ac03f
+      resolved-ref: c4ac03feb3147dcc5940311b70a24b24f77597eb
       url: "https://github.com/Ritikrai09/rr_youtube_video.git"
     source: git
-    version: "2.2.1"
+    version: "2.2.2"
 sdks:
   dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.22.0"
