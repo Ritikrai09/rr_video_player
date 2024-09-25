@@ -39,7 +39,7 @@ dependency_overrides:
   youtube_explode_dart_2:
     git:
       url: https://github.com/Ritikrai09/rr_youtube_video.git
-      ref: c4ac03f
+      ref: 3ee6b67
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
