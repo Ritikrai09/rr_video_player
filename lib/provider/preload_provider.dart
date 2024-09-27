@@ -369,7 +369,7 @@ class PreloadProvider extends ChangeNotifier {
   // }
 
 
-  void onVideoIndexChanged(int index, String apiKey) {
+  void onVideoIndexChanged(int index, {String? apiKey}) {
     if (index > _focusedIndex) {
       _playNext(index,apiKey:apiKey);
     } else {
