@@ -15,7 +15,7 @@ class CacheVideoController {
           apiKey: apiKey
         );
 
-        String? youtubeurl = urlss != null ? await getUrlFromVideoQualityUrls(
+        String? youtubeurl = urlss != null && urlss.isNotEmpty ? await getUrlFromVideoQualityUrls(
           qualityList: [1080, 720, 480, 360, 240 ],
           videoUrls: urlss,
           initQuality: initQuality
