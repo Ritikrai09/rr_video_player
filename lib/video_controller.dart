@@ -15,11 +15,13 @@ class CacheVideoController {
           apiKey: apiKey
         );
 
-        final youtubeurl = await getUrlFromVideoQualityUrls(
+        String? youtubeurl = await getUrlFromVideoQualityUrls(
           qualityList: [1080, 720, 480, 360, 240 ],
-          videoUrls: urlss,
+          videoUrls: urlss ?? [],
           initQuality: initQuality
         );
+
+        if(youtubeurl != null ){
 
           _controller = CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
           invalidateCacheIfOlderThan: cacheDuration ?? Duration(days: 7));
@@ -37,6 +39,7 @@ class CacheVideoController {
           _controller.play();
           
           return  _controller;
+        }
 
   }
 

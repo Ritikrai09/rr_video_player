@@ -168,12 +168,12 @@ class PreloadProvider extends ChangeNotifier {
 
         final youtubeurl = await getUrlFromVideoQualityUrls(
           qualityList: [ 720, 480, 360, 240],
-          videoUrls: urlss,
+          videoUrls: urlss ?? [],
           initQuality : 360,
         );
 
           final CachedVideoPlayerPlusController _controller =
-          CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl), 
+          CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl ?? ""), 
           invalidateCacheIfOlderThan: Duration(days: 15));
 
           _controller.setLooping(_looping);
@@ -183,10 +183,15 @@ class PreloadProvider extends ChangeNotifier {
                 /// Add to [controllers] list
           controllers[index] = _controller;
 
+        if(youtubeurl != null){
+          
           /// Initialize
           await _controller.initialize();
 
           log('🚀🚀🚀 INITIALIZED Youtube $index');
+
+        } 
+
 
        } else {
 
@@ -205,6 +210,7 @@ class PreloadProvider extends ChangeNotifier {
           await _controller.initialize();
 
           log('🚀🚀🚀 INITIALIZED $index');
+       
        }
     }
   }

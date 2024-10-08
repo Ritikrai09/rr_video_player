@@ -161,7 +161,11 @@ class VideoApis {
       // Close the YoutubeExplode's http client.
       yt.close();
       return urls;
-    } catch (error) {
+    } on VideoUnplayableException {
+      
+       return null;
+
+    }  catch (error) {
       if (error.toString().contains('XMLHttpRequest')) {
         log(
           podErrorString(

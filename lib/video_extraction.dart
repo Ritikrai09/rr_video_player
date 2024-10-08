@@ -1,7 +1,7 @@
 import 'package:flutter_preload_videos/models/vimeo_models.dart';
 import 'package:flutter_preload_videos/video_apis.dart';
 
-Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
+Future<List<VideoQalityUrls>?> getVideoQualityUrlsFromYoutube(
     String youtubeIdOrUrl,
     bool live,
     {String? apiKey}
@@ -31,7 +31,7 @@ Future<List<VideoQalityUrls>> getVideoQualityUrlsFromYoutube(
     return urls0 ?? [];
   }
 
-  Future<String> getUrlFromVideoQualityUrls({
+  Future<String?> getUrlFromVideoQualityUrls({
     required List<int> qualityList,
     required List<VideoQalityUrls> videoUrls,
     required int initQuality,
