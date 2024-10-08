@@ -4,7 +4,7 @@ import 'package:flutter_preload_videos/video_extraction.dart';
 
 class CacheVideoController {
   
-  Future<CachedVideoPlayerPlusController> playYoutubeVideo({
+  Future<CachedVideoPlayerPlusController?> playYoutubeVideo({
   required String url, bool isLive =false, Duration? cacheDuration, int initQuality = 480, Duration? setDuration,String? apiKey }) async {
 
      CachedVideoPlayerPlusController _controller;
