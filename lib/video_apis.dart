@@ -144,7 +144,7 @@ class VideoApis {
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         
         urls.addAll(
-          manifest.muxed.map(
+          manifest.muxed.where((video) => video.qualityLabel.contains('p')).map(
             (element) => VideoQalityUrls(
               quality: int.parse(element.qualityLabel.split('p')[0]),
               url: element.url.toString(),
