@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_preload_videos/models/vimeo_models.dart';
 import 'package:flutter_preload_videos/video_apis.dart';
 
@@ -36,7 +38,11 @@ Future<List<VideoQalityUrls>?> getVideoQualityUrlsFromYoutube(
     required List<VideoQalityUrls> videoUrls,
     required int initQuality,
   }) async {
-
+   
+    videoUrls.forEach((e){
+       log(e.quality.toString());
+    });
+    
     final videoUrl = await sortQualityVideoUrls(videoUrls);
 
 
