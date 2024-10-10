@@ -142,6 +142,8 @@ class VideoApis {
         final manifest =
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         
+
+         log(manifest.muxed.toString());
          manifest.muxed.forEach((video){
            log("--------- quality info ---------------");
             log(video.toJson().toString());
@@ -154,7 +156,6 @@ class VideoApis {
          });
         
        
-         log(urls.toString());
         log("manifest.toString()");
         log(manifest.toString());
 
