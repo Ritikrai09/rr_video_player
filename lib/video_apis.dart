@@ -149,7 +149,7 @@ class VideoApis {
          log("manifest.videoOnly.toString()");
          log(manifest.videoOnly.toString());
 
-         manifest.video.forEach((video){
+         manifest.muxed.forEach((video){
            log("--------- quality info ---------------");
             log(video.toJson().toString());
             if (video.qualityLabel.contains('p')) {
