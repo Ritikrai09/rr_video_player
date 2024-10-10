@@ -29,7 +29,7 @@ dependencies:
   cached_video_player_plus:
   youtube_explode_dart:
     git:
-      url: https://github.com/bigzhu/youtube_explode_dart.git
+      url: https://github.com/Hexer10/youtube_explode_dart
       ref: master
 
 dev_dependencies:
