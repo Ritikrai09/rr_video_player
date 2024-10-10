@@ -30,10 +30,10 @@ dependencies:
   youtube_explode_dart:
     git:
       url: https://github.com/Hexer10/youtube_explode_dart
-      ref: master
+      ref: 8a485fb
 
 dev_dependencies:
-  build_runner: any
+  build_runner: any 
   flutter_test:
     sdk: flutter
   freezed: any

@@ -849,7 +849,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
+      ref: "8a485fb"
       resolved-ref: "8a485fbc5c575850fc489d39e2941cf3ac48e190"
       url: "https://github.com/Hexer10/youtube_explode_dart"
     source: git
