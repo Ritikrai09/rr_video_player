@@ -152,8 +152,8 @@ class VideoApis {
           ),
         );
          log(urls.toString());
-        // log("manifest.toString()");
-        // log(manifest.toString());
+        log("manifest.toString()");
+        log(manifest.toString());
 
         // log("URL.toString()");
         // log(urls.toString());
@@ -162,7 +162,7 @@ class VideoApis {
       yt.close();
       return urls;
     } on VideoUnplayableException {
-      
+        
        return null;
 
     }  catch (error) {
