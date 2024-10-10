@@ -8,7 +8,7 @@ Future<List<VideoQalityUrls>?> getVideoQualityUrlsFromYoutube(
     bool live,
     {String? apiKey}
   ) async {
-    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live, apiKey:apiKey) ??
+    return await VideoApis.getYoutubeVideoQualityUrls(youtubeIdOrUrl, live,) ??
         [];
   }
 

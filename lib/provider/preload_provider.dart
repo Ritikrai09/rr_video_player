@@ -163,7 +163,6 @@ class PreloadProvider extends ChangeNotifier {
           var urlss = await  getVideoQualityUrlsFromYoutube(
           PlayVideoFrom.youtube(_urls[index]).dataSource ?? "",
           false,
-          apiKey:apiKey
         );
 
         final youtubeurl = await getUrlFromVideoQualityUrls(

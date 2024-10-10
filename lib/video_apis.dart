@@ -123,7 +123,6 @@ class VideoApis {
   static Future<List<VideoQalityUrls>?> getYoutubeVideoQualityUrls(
     String youtubeIdOrUrl,
     bool live,
-    {String? apiKey}
   ) async {
     try {
       final yt = YoutubeExplode();
@@ -143,23 +142,18 @@ class VideoApis {
         final manifest =
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         
-        urls.addAll(
-          manifest.muxed.where((video) {
-             log("video.toJson().toString()");
-              log(video.toJson().toString());
-              return video.videoQuality.name.contains('p');
-          
-          }).map(
-            (element) {
-               log("element.toJson().toString()");
-              log(element.toJson().toString());
-              return VideoQalityUrls(
-              quality: int.parse(element.videoQuality.name.split('p')[0]),
-              url: element.url.toString(),
-            );
+         manifest.muxed.forEach((video){
+           log("--------- quality info ---------------");
+            log(video.toJson().toString());
+            if (video.qualityLabel.contains('p')) {
+             urls.add(VideoQalityUrls(
+              quality: int.parse(video.qualityLabel.split('p')[0]),
+              url: video.url.toString(),
+            ));  
             }
-          ),
-        );
+         });
+        
+       
          log(urls.toString());
         log("manifest.toString()");
         log(manifest.toString());
