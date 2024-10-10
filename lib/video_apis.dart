@@ -144,11 +144,20 @@ class VideoApis {
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         
         urls.addAll(
-          manifest.muxed.where((video) => video.qualityLabel.contains('p')).map(
-            (element) => VideoQalityUrls(
-              quality: int.parse(element.qualityLabel.split('p')[0]),
+          manifest.muxed.where((video) {
+             log("video.toJson().toString()");
+              log(video.toJson().toString());
+              return video.videoQuality.name.contains('p');
+          
+          }).map(
+            (element) {
+               log("element.toJson().toString()");
+              log(element.toJson().toString());
+              return VideoQalityUrls(
+              quality: int.parse(element.videoQuality.name.split('p')[0]),
               url: element.url.toString(),
-            ),
+            );
+            }
           ),
         );
          log(urls.toString());
