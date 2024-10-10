@@ -165,11 +165,12 @@ class PreloadProvider extends ChangeNotifier {
           false,
         );
 
-        final youtubeurl = await getUrlFromVideoQualityUrls(
+        final youtubeurl =  urlss != null && urlss.isNotEmpty ?
+           await getUrlFromVideoQualityUrls(
           qualityList: [ 720, 480, 360, 240],
-          videoUrls: urlss ?? [],
+          videoUrls: urlss,
           initQuality : 360,
-        );
+        ) : null;
 
           final CachedVideoPlayerPlusController _controller =
           CachedVideoPlayerPlusController.networkUrl(Uri.parse(youtubeurl ?? ""), 
