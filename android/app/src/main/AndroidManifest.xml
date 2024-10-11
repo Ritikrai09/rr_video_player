@@ -2,6 +2,7 @@
     package="com.example.flutter_preload_videos">
    <application
         android:label="flutter_preload_videos"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
