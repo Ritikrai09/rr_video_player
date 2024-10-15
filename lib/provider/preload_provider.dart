@@ -158,7 +158,7 @@ class PreloadProvider extends ChangeNotifier {
 
     if (_urls.length > index && index >= 0) {
       /// Create new controller
-        if (_urls[index].contains('youtube') || _urls[index].contains('youtu.be')) {
+        if (_urls[index].length < 100 && (_urls[index].contains('youtube') || _urls[index].contains('youtu.be'))) {
           
           var urlss = await  getVideoQualityUrlsFromYoutube(
           PlayVideoFrom.youtube(_urls[index]).dataSource ?? "",
@@ -299,7 +299,7 @@ class PreloadProvider extends ChangeNotifier {
     }
   }
 
-  void _playNext(int index,{String? apiKey}) {
+  void _playNext(int index) {
     /// Stop [index - 1] controller
     _stopControllerAtIndex(index - 1);
 
@@ -375,11 +375,11 @@ class PreloadProvider extends ChangeNotifier {
   // }
 
 
-  void onVideoIndexChanged(int index, {String? apiKey}) {
+  Future onVideoIndexChanged(int index) async {
     if (index > _focusedIndex) {
-      _playNext(index,apiKey:apiKey);
+      _playNext(index);
     } else {
-      _playPrevious(index,apiKey:apiKey);
+      _playPrevious(index);
     }
     _focusedIndex = index;
     notifyListeners();
