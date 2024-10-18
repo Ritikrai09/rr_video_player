@@ -143,13 +143,13 @@ class VideoApis {
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         
 
-        log("manifest.video.toString()");
+        // log("manifest.video.toString()");
          log(manifest.video.toString());
          
          log("manifest.videoOnly.toString()");
          log(manifest.videoOnly.toString());
 
-         manifest.muxed.forEach((video){
+           manifest.muxed.forEach((video){
            log("--------- quality info ---------------");
             log(video.toJson().toString());
             if (video.qualityLabel.contains('p')) {
