@@ -849,11 +849,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: cf6b492
-      resolved-ref: cf6b492e5d43b91973b3e7023ba10470120eecd6
-      url: "https://github.com/Hexer10/youtube_explode_dart.git"
+      ref: "030c41b"
+      resolved-ref: "030c41b7ab2f452e86e60bcee94ccdbafec92bb6"
+      url: "https://github.com/Ritikrai09/rr_youtube_video.git"
     source: git
-    version: "2.3.0"
+    version: "2.3.2"
 sdks:
   dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.22.0"
