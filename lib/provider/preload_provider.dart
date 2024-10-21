@@ -307,7 +307,7 @@ class PreloadProvider extends ChangeNotifier {
     _disposeControllerAtIndex(index - 2);
 
     /// Play current video (already initialized)
-    _playControllerAtIndex(index);
+    // _playControllerAtIndex(index);
 
     /// Initialize [index + 1] controller
     // if(index < _urls.length-1){
@@ -326,7 +326,7 @@ class PreloadProvider extends ChangeNotifier {
     _disposeControllerAtIndex(index + 2);
 
     /// Play current video (already initialized)
-    _playControllerAtIndex(index);
+    // _playControllerAtIndex(index);
 
     /// Initialize [index - 1] controller
     // if(index > 0){
