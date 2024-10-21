@@ -23,10 +23,10 @@ class PreloadProvider extends ChangeNotifier {
 
   get getVideoQuality => videoQuality;
 
-  set setApiKey (String key){
-    apiKey = key;
-    notifyListeners();
-  }
+  // set setApiKey (String key){
+  //   apiKey = key;
+  //   notifyListeners();
+  // }
 
   set setVideoQuality (int setQuality){
     videoQuality = setQuality;
@@ -65,6 +65,13 @@ class PreloadProvider extends ChangeNotifier {
      
     final Map<int, CachedVideoPlayerPlusController?> _controllers = {};
 
+    set setController(CachedVideoPlayerPlusController controller){
+
+      _controllers[_focusedIndex]= controller;
+       notifyListeners();
+
+    }
+
     Map<int, CachedVideoPlayerPlusController?> get controllers => _controllers;
 
    
@@ -90,7 +97,11 @@ class PreloadProvider extends ChangeNotifier {
   int _focusedIndex = 0;
 
   int get focusedIndex => _focusedIndex;
-
+  
+  set setFocusedIndex(index){
+     _focusedIndex = index;
+     notifyListeners(); 
+  }
   // Future disposeNormalVideo({required int index, required int id}) async {
   //     if (_postAndLiveVideos.length > index && index >= 0 && postLiveControllers[id] != null) {
   //     /// Get controller at [index]
@@ -307,11 +318,11 @@ class PreloadProvider extends ChangeNotifier {
     _disposeControllerAtIndex(index - 2);
 
     /// Play current video (already initialized)
-    // _playControllerAtIndex(index);
+     _playControllerAtIndex(index);
 
     /// Initialize [index + 1] controller
     // if(index < _urls.length-1){
-      _initializeControllerAtIndex(index + 1,apiKey:apiKey);
+      // _initializeControllerAtIndex(index + 1,apiKey:apiKey);
     // }
     //  if(index < _urls.length-3){
     //   _initializeControllerAtIndex(index + 2);
@@ -326,11 +337,11 @@ class PreloadProvider extends ChangeNotifier {
     _disposeControllerAtIndex(index + 2);
 
     /// Play current video (already initialized)
-    // _playControllerAtIndex(index);
+     _playControllerAtIndex(index);
 
     /// Initialize [index - 1] controller
     // if(index > 0){
-      _initializeControllerAtIndex(index - 1,apiKey:apiKey);
+      // _initializeControllerAtIndex(index - 1,apiKey:apiKey);
     // }
     //  if(index > 2){
     //   _initializeControllerAtIndex(index - 2);
