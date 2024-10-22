@@ -878,8 +878,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: a9460da
-      resolved-ref: a9460da8fd1a8e514d5f33fbaaabddbbb5b5c68b
+      ref: "3c435c1"
+      resolved-ref: "3c435c1e1f1f22e03c0bab973416119bf24126f7"
       url: "https://github.com/Ritikrai09/rr_youtube_video.git"
     source: git
     version: "2.3.2"
