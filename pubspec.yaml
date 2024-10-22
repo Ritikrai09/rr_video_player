@@ -30,7 +30,7 @@ dependencies:
   youtube_explode_dart:
     git:
       url: https://github.com/Ritikrai09/rr_youtube_video.git
-      ref: 84e33cd
+      ref: 92946ae
 
 dev_dependencies:
   build_runner: any 
